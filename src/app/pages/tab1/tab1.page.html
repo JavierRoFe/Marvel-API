@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+      <h2>Characters</h2>
+      <ion-icon name="search" slot="end"></ion-icon>
+  </ion-toolbar>
+  <ion-toolbar id="toolbar-search">
+      <ion-searchbar show-cancel-button="focus" animated="true"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-characters [characters]='characters'></app-characters>
+  <ion-infinite-scroll threshold='25%' position="bottom" (ionInfinite)='loadCharacters($event)'>
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more characters...">
+
+      </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
