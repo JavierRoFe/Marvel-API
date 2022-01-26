@@ -9,6 +9,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-button slot="fixed" (click)="goToTop()"><ion-icon name="arrow-up"></ion-icon></ion-button> 
   <app-characters [characters]='characters'></app-characters>
   <ion-infinite-scroll threshold='25%' position="bottom" (ionInfinite)='loadCharacters($event)'>
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more characters...">

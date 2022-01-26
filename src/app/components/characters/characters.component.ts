@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { ResultCharacter } from 'src/app/interfaces/interfaces';
+import { CharacterDetailComponent } from '../character-detail/character-detail.component';
 
 @Component({
   selector: 'app-characters',
@@ -11,16 +12,19 @@ export class CharactersComponent implements OnInit {
 
   @Input() characters: ResultCharacter[] = [];
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {}
 
-  openCharacterDetails(id){
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        characterId: id
-      }
-    };
-    this.router.navigate(['character-detail'], navigationExtras);
+  async openCharacterDetails(id){
+    const modal = await this.modalCtrl.create({
+      component: CharacterDetailComponent,
+      componentProps: {id}
+    })
+    modal.present()
+  }
+
+  getCharacterImage(character){
+    return character.thumbnail.path + '/standard_medium.' + character.thumbnail.extension;
   }
 }

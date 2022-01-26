@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="goBack()">
+      <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="character" class="ion-text-center">
+  <h3>{{character.name}}</h3>
+  <img src="{{getCharacterImage(character)}}" alt="">
+</ion-content>

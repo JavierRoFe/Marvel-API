@@ -1,10 +1,8 @@
 <ion-list *ngFor='let character of characters'>
   <ion-item (click)="openCharacterDetails(character.id)">
-      <img src="" alt="">
-      <!--character.thumbnail.path + /standard_medium. + character.thumbnail.extension-->
+      <img src="{{getCharacterImage(character)}}" alt="">
       <ion-label>
           <h2>{{character.name}}</h2>
-          <p>{{character.id}}</p>
           <p>{{character.description}}</p>
       </ion-label>
   </ion-item>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { IonContent } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -7,6 +8,8 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+
+  @ViewChild(IonContent, { static: false }) content: IonContent;
 
   characters = []
 
@@ -33,6 +36,10 @@ export class Tab1Page {
           event.target.complete()
         }
       })
+  }
+
+  goToTop(){
+    this.content.scrollToTop(500);
   }
 
 }

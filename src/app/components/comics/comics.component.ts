@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { ResultComic } from 'src/app/interfaces/interfaces';
+import { ComicDetailComponent } from '../comic-detail/comic-detail.component';
 
 @Component({
   selector: 'app-comics',
@@ -11,17 +12,20 @@ export class ComicsComponent implements OnInit {
 
   @Input() comics: ResultComic[] = [];
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {}
 
-  openComicDetails(id){
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        comicId: id
-      }
-    };
-    this.router.navigate(['comic-detail'], navigationExtras);
+  async openComicDetails(id){
+    const modal = await this.modalCtrl.create({
+      component: ComicDetailComponent,
+      componentProps: {id}
+    })
+    modal.present()
+  }
+
+  getComicImage(comic){
+    return comic.thumbnail.path + '/standard_medium.' + comic.thumbnail.extension;
   }
 
 }
