@@ -3,3 +3,17 @@ img{
     height: 50px;
     border-radius: 5px;
 }
+
+ion-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0px;
+
+    ion-label{
+        display: flex;
+        flex-direction: column;
+        margin-left: 20px;
+    }
+}

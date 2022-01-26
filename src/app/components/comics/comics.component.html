@@ -1,9 +1,9 @@
-<ion-list *ngFor='let comic of comics'>
-  <ion-item (click)="openComicDetails(comic.id)">
+<ion-list>
+  <ion-item *ngFor='let comic of comics' (click)="openComicDetails(comic.id)">
     <img src="{{getComicImage(comic)}}" alt="">
-      <ion-label>
-          <h2>{{comic.title}}</h2>
-          <p>{{comic.description}}</p>
-      </ion-label>
+    <ion-label>
+      <h2>{{comic.title}}</h2>
+      <p>{{comic.description}}</p>
+    </ion-label>
   </ion-item>
 </ion-list>
