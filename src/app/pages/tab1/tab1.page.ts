@@ -60,4 +60,8 @@ export class Tab1Page {
     this.searchbarVisible = false
   }
 
+  ionViewWillEnter(){
+    this.hideSearchBar();
+  }
+
 }

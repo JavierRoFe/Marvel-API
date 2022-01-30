@@ -1,9 +1,11 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar class="comics-toolbar">
       <h2>Comics</h2>
-      <ion-icon name="search" slot="end"></ion-icon>
+      <ion-button slot="end" color="light" (click)="searchbarVisible == true ? hideSearchBar() : showSearchBar()">
+        <ion-icon name="search" id="search-icon-comics"></ion-icon>
+      </ion-button> 
   </ion-toolbar>
-  <ion-toolbar id="toolbar-search">
+  <ion-toolbar id="toolbar-search-comics" class="toolbar-search-comcis">
       <ion-searchbar show-cancel-button="focus" animated="true"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
