@@ -5,3 +5,16 @@ ion-button{
     height: 50px;
     --border-radius: 50%;
 }
+
+.characters-toolbar{
+    padding: 5px 15px;
+}
+
+.toolbar-search{
+    display: none;
+}
+
+ion-toolbar{
+    --background: var(--ion-color-primary);
+    --color: var(--ion-color-light);
+}

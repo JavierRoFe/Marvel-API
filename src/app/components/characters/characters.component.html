@@ -1,12 +1,15 @@
-<ion-list *ngFor='let character of characters'>
-  <ion-item (click)="openCharacterDetails(character.id)">
+<ion-list *ngFor='let character of characters' lines="none">
+  <ion-item color="dark">
+    <div (click)="openCharacterDetails(character.id)" class="item-body">
       <img src="{{getCharacterImage(character)}}" alt="">
       <ion-label>
           <h2>{{character.name}}</h2>
           <p>{{character.description}}</p>
       </ion-label>
-      <ion-buttons slot="end" (click)="storeFavCharacter(character)">
-        <ion-icon slot="end" name="heart-outline"></ion-icon>
-      </ion-buttons>
+    </div>
+      
+    <ion-buttons slot="end" (click)="storeFavCharacter(character)">
+      <ion-icon slot="end" name="heart-outline"></ion-icon>
+    </ion-buttons>
   </ion-item>
 </ion-list>

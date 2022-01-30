@@ -13,6 +13,8 @@ export class Tab1Page {
 
   characters = []
 
+  searchbarVisible = false;
+
   constructor(private data: DataService) { }
 
   ngOnInit(): void {
@@ -40,6 +42,22 @@ export class Tab1Page {
 
   goToTop(){
     this.content.scrollToTop(500);
+  }
+
+  showSearchBar(){
+    var btnsearch = document.getElementById('search-icon')
+    btnsearch.setAttribute('name', 'close')
+    var toolbarsearch = document.getElementById('toolbar-search')
+    toolbarsearch.style.display="block"
+    this.searchbarVisible = true
+  }
+
+  hideSearchBar(){
+    var btnsearch = document.getElementById('search-icon')
+    btnsearch.setAttribute('name', 'search')
+    var toolbarsearch = document.getElementById('toolbar-search')
+    toolbarsearch.style.display="none"
+    this.searchbarVisible = false
   }
 
 }
