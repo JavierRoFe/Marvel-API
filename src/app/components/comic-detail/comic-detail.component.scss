@@ -1,0 +1,20 @@
+.back-btn{
+    margin-left: 15px;
+}
+
+.fav-btn{
+    margin: 20px;
+}
+
+.description{
+    margin: 20px 30px;
+
+    p{
+        text-align: justify;
+    }
+}
+
+ion-toolbar{
+    --background: var(--ion-color-primary);
+    --color: var(--ion-color-light);
+}

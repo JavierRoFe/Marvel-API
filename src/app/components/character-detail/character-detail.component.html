@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" (click)="goBack()">
+    <ion-buttons slot="start" (click)="goBack()" class="back-btn">
       <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
     </ion-buttons>
     <ion-title></ion-title>
@@ -10,4 +10,13 @@
 <ion-content *ngIf="character" class="ion-text-center">
   <h3>{{character.name}}</h3>
   <img src="{{getCharacterImage(character)}}" alt="">
+
+  <div class="description">
+    <p>{{character.description}}</p>
+  </div>
+
+  <ion-button (click)="onClick()" expand="block" class="fav-btn">
+    Añadir a favoritos
+    <ion-icon slot="end" name="heart-outline"></ion-icon>
+  </ion-button>
 </ion-content>
