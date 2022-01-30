@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ResultCharacter } from 'src/app/interfaces/interfaces';
 import { CharacterDetailComponent } from '../character-detail/character-detail.component';
+import { DataLocalService } from '../../services/data-local.service';
 
 @Component({
   selector: 'app-characters',
@@ -12,7 +13,9 @@ export class CharactersComponent implements OnInit {
 
   @Input() characters: ResultCharacter[] = [];
 
-  constructor(private modalCtrl: ModalController) { }
+  favCharacters = [];
+
+  constructor(private modalCtrl: ModalController, private dataLocal: DataLocalService) { }
 
   ngOnInit() {}
 
@@ -26,5 +29,11 @@ export class CharactersComponent implements OnInit {
 
   getCharacterImage(character){
     return character.thumbnail.path + '/standard_medium.' + character.thumbnail.extension;
+  }
+
+  storeFavCharacter(character){
+    console.log('PERSONAJE: ' + character.name)
+    //this.favCharacters.push(character)
+    this.dataLocal.setFavCharacter(character)
   }
 }
