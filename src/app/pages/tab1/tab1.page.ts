@@ -37,7 +37,17 @@ export class Tab1Page {
         if (event) {
           event.target.complete()
         }
-      })
+      }
+    )
+  }
+
+  searchCharacters(searchValue){
+    this.data.searchCharacters(searchValue).subscribe(
+      resp => {
+        this.characters = []
+        this.characters.push(...resp.data.results)
+      }
+    )
   }
 
   goToTop(){
@@ -55,13 +65,34 @@ export class Tab1Page {
   hideSearchBar(){
     var btnsearch = document.getElementById('search-icon')
     btnsearch.setAttribute('name', 'search')
+
     var toolbarsearch = document.getElementById('toolbar-search')
     toolbarsearch.style.display="none"
     this.searchbarVisible = false
+
+    var searchbar = document.querySelector('ion-searchbar');
+    if(searchbar.value != '' && this.characters.length == 0){
+      this.resetCharactersOffset()
+      this.loadCharacters()
+    }
+    else if(searchbar.value != '' && this.characters.length > 0){
+      this.reloadCharactersList()
+    }
+    searchbar.value = '';
   }
 
   ionViewWillEnter(){
     this.hideSearchBar();
+  }
+
+  resetCharactersOffset(){
+    this.data.offsetCharacters = 0;
+  }
+
+  reloadCharactersList(){
+    this.characters = []
+    this.resetCharactersOffset()
+    this.loadCharacters()
   }
 
 }
