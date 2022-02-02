@@ -41,13 +41,22 @@ export class Tab1Page {
     )
   }
 
+  blockScrollSearching(event?){
+    console.log('bloqueando el infinite scroll')
+    if(event){
+      event.target.complete();
+    }
+  }
+
   searchCharacters(searchValue){
-    this.data.searchCharacters(searchValue).subscribe(
-      resp => {
-        this.characters = []
-        this.characters.push(...resp.data.results)
-      }
-    )
+    if(searchValue.target.value != ''){
+      this.data.searchCharacters(searchValue).subscribe(
+        resp => {
+          this.characters = []
+          this.characters.push(...resp.data.results)
+        }
+      )
+    }
   }
 
   goToTop(){
@@ -62,7 +71,7 @@ export class Tab1Page {
     this.searchbarVisible = true
   }
 
-  hideSearchBar(){
+  hideSearchBar(event?){
     var btnsearch = document.getElementById('search-icon')
     btnsearch.setAttribute('name', 'search')
 
@@ -77,6 +86,11 @@ export class Tab1Page {
     }
     else if(searchbar.value != '' && this.characters.length > 0){
       this.reloadCharactersList()
+    }
+    if(event){
+      if(searchbar.value == '' && this.characters[0].id != 1011334){
+        this.reloadCharactersList()
+      }
     }
     searchbar.value = '';
   }

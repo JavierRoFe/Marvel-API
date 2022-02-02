@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { ResultCharacter } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +7,7 @@ import { ResultCharacter } from '../interfaces/interfaces';
 export class DataLocalService {
 
   //private _storage: Storage | null = null;
-  favCharactersArray = []
+  favCharactersArray
   favComicsArray = []
 
   constructor(private storage: Storage) {
@@ -22,16 +21,25 @@ export class DataLocalService {
   }
 
   async setFavCharacter(character){
-    //this.favCharactersArray = await this.storage.get('favcharacters')
+    this.favCharactersArray = await this.storage.get('favcharacters')
     console.log('FAVCHARACTERS: ', this.favCharactersArray)
     if(this.favCharactersArray != null){
-      if(this.favCharactersArray.includes(character)){
+      console.log('ARRAY not null', character)
+      var alreadyExists = false
+      for(let favcharacter of this.favCharactersArray){
+        if(favcharacter.id == character.id){
+          alreadyExists = true
+          console.log('Existe? ', alreadyExists)
+        } 
+      }
+      if(alreadyExists){
         console.log('Ya existe: ', character.name)
       }else{
         this.favCharactersArray.push(character)
       }
     }else{
-      this.favCharactersArray[0] = character
+      this.favCharactersArray = []
+      this.favCharactersArray.push(character)
     }
     console.log('Fav characters antes de subirlo: ', this.favCharactersArray)
     await this.storage.set('favcharacters', this.favCharactersArray)
@@ -42,12 +50,19 @@ export class DataLocalService {
   }
 
   async unsetFavCharacters(character){
-    this.favCharactersArray.forEach((element, index) => {
+    var tmpArray = []
+    for(let favcharacter of this.favCharactersArray){
+      if(favcharacter.id != character.id){
+        tmpArray.push(favcharacter)
+      }
+    }
+    this.favCharactersArray = tmpArray;
+    /*this.favCharactersArray.forEach((element, index) => {
       if(element.id == character.id){
         console.log('Character removed: ', character.name)
         this.favCharactersArray.splice(index, 1)
       } 
-    });
+    });*/
     await this.storage.set('favcharacters', this.favCharactersArray)
   }
 

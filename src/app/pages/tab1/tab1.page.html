@@ -1,19 +1,19 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="characters-toolbar">
       <h2>Characters</h2>
-      <ion-button slot="end" color="light" (click)="searchbarVisible == true ? hideSearchBar() : showSearchBar()">
+      <ion-button slot="end" color="light" (click)="searchbarVisible == true ? hideSearchBar($event) : showSearchBar()">
         <ion-icon name="search" id="search-icon"></ion-icon>
       </ion-button> 
   </ion-toolbar>
   <ion-toolbar id="toolbar-search" class="toolbar-search">
-      <ion-searchbar show-cancel-button="focus" animated="true" (search)="searchCharacters($event)" (ionInput)="searchCharacters($event)" (ionClear)="reloadCharactersList()"></ion-searchbar>
+      <ion-searchbar show-cancel-button="focus" animated="true" (search)="searchCharacters($event)" (ionClear)="reloadCharactersList()"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-button slot="fixed" (click)="goToTop()"><ion-icon name="arrow-up"></ion-icon></ion-button> 
   <app-characters [characters]='characters'></app-characters>
-  <ion-infinite-scroll threshold='25%' position="bottom" (ionInfinite)='loadCharacters($event)'>
+  <ion-infinite-scroll threshold='25%' position="bottom" (ionInfinite)='searchbarVisible == true ? blockScrollSearching($event) : loadCharacters($event)'>
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more characters...">
 
       </ion-infinite-scroll-content>
