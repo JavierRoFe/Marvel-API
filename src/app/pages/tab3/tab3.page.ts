@@ -31,8 +31,13 @@ export class Tab3Page {
     })
   }
 
-  removeCharacterFromList(character){
-    this.dataLocal.unsetFavCharacters(character)
+  async removeCharacterFromList(character){
+    console.log('Borrando...')
+    await this.dataLocal.unsetFavCharacters(character)
+    this.dataLocal.getFavCharacters().then(data =>{
+      this.characters = []
+      this.characters = data
+    })
   }
 
 }

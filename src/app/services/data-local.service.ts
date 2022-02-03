@@ -67,8 +67,8 @@ export class DataLocalService {
   }
 
   async getFavCharacters(){
-    const characters = await this.storage.get('favcharacters')
-    return characters
+    this.favCharactersArray = await this.storage.get('favcharacters')
+    return this.favCharactersArray
   }
 
   async getFavComics(){
