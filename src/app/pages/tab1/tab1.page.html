@@ -6,7 +6,7 @@
       </ion-button> 
   </ion-toolbar>
   <ion-toolbar id="toolbar-search" class="toolbar-search">
-      <ion-searchbar show-cancel-button="focus" animated="true" (search)="searchCharacters($event)" (ionClear)="reloadCharactersList()"></ion-searchbar>
+      <ion-searchbar show-cancel-button="focus" animated="true" (search)="searchCharacters($event)" debounce=500 (ionChange)="searchCharacters($event)" (ionClear)="reloadCharactersList()"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
