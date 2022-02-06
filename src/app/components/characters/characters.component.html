@@ -1,5 +1,5 @@
-<ion-list *ngFor='let character of characters' lines="none">
-  <ion-item color="dark">
+<ion-list lines="none">
+  <ion-item color="dark" *ngFor='let character of characters'>
     <div (click)="openCharacterDetails(character.id)" class="item-body">
       <img src="{{getCharacterImage(character)}}" alt="">
       <ion-label>

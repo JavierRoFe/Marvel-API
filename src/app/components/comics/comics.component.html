@@ -1,6 +1,6 @@
 
-<ion-list *ngFor='let comic of comics' lines="none">
-  <ion-item color="dark">
+<ion-list lines="none">
+  <ion-item color="dark" *ngFor='let comic of comics'>
     <div (click)="openComicDetails(comic.id)" class="item-body">
       <img src="{{getComicImage(comic)}}" alt="">
       <ion-label>

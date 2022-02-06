@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Favourites
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list *ngFor='let character of characters'>
+  <!-- <ion-list *ngFor='let character of characters'>
     <ion-item>
         <img src="{{getCharacterImage(character)}}" alt="">
         <ion-label>
@@ -18,5 +18,18 @@
           <ion-icon slot="end" name="heart-outline"></ion-icon>
         </ion-buttons>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
+  <ion-grid fixed style="height: 300px; white-space: nowrap;">
+    <ion-row scrollX=true>
+      <ion-col size="6"  *ngFor="let character of characters; let i = index" class="ion-text-center">
+        <div *ngIf="i%2==0">
+          <img src="{{getCharacterImage(character)}}" alt="">
+        </div>
+        <div *ngIf="i%2!=0">
+          <img src="{{getCharacterImage(character)}}" alt="">
+        </div>
+      </ion-col>
+      <!-- <ion-col size="6" *ngIf="i%2!=0"><div><img src="{{getCharacterImage(character)}}" alt=""></div></ion-col> -->
+    </ion-row>
+  </ion-grid>
 </ion-content>
