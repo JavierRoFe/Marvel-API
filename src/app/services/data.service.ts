@@ -15,6 +15,7 @@ export class DataService {
   offsetCharacters = 0
   offsetComics = 0
   offsetSearchCharacters = 0
+  offsetSearchComics = 0
 
   getCharacters(){
     return this.http.get<RespuestaCharacter>(URL + `characters?` + APIKEY + `&limit=20&offset=${this.offsetCharacters}`);
@@ -33,6 +34,10 @@ export class DataService {
   }
 
   searchCharacters(value){
-    return this.http.get<RespuestaCharacter>(URL + `characters?nameStartsWith=${value}&` + APIKEY + `&limit=50&offset=${this.offsetSearchCharacters}`);
+    return this.http.get<RespuestaCharacter>(URL + `characters?nameStartsWith=${value}&` + APIKEY + `&limit=20&offset=${this.offsetSearchCharacters}`);
+  }
+
+  searchComics(value){
+    return this.http.get<RespuestaComic>(URL + `comics?titleStartsWith=${value}&` + APIKEY + `&limit=20&offset=${this.offsetSearchComics}`);
   }
 }

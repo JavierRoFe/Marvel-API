@@ -40,6 +40,40 @@ export class Tab2Page {
       })
   }
 
+  loadComicsOnSearch(event?){
+    console.log('bloqueando el infinite scroll')
+    this.data.offsetSearchComics += 20
+    var searchbar = document.querySelector('ion-searchbar');
+    this.data.searchComics(searchbar.value).subscribe(
+      resp=> {
+        console.log(resp)
+        if ((this.data.offsetSearchComics + 20) >= parseInt(resp.data.total)) {
+          this.data.offsetSearchComics += (parseInt(resp.data.total) - this.data.offsetSearchComics)
+          this.comics.push(...resp.data.results)
+          //event.target.disabled = true;
+          event.target.complete();
+          return;
+        }
+        this.comics.push(...resp.data.results)
+        if(event){
+          event.target.complete();
+        }
+      }
+    )
+  }
+
+  searchComics(searchValue){
+    this.data.offsetSearchComics = 0;
+    if(searchValue.target.value != ''){
+      this.data.searchComics(searchValue.target.value).subscribe(
+        resp => {
+          this.comics = []
+          this.comics.push(...resp.data.results)
+        }
+      )
+    }
+  }
+
   goToTop(){
     this.content.scrollToTop(500);
   }
@@ -52,16 +86,42 @@ export class Tab2Page {
     this.searchbarVisible = true
   }
 
-  hideSearchBar(){
+  hideSearchBar(event?){
     var btnsearch = document.getElementById('search-icon-comics')
     btnsearch.setAttribute('name', 'search')
+
     var toolbarsearch = document.getElementById('toolbar-search-comics')
     toolbarsearch.style.display="none"
     this.searchbarVisible = false
+
+    var searchbar = document.querySelector('ion-searchbar');
+    if(searchbar.value != '' && this.comics.length == 0){
+      this.resetComicsOffset()
+      this.loadComics()
+    }
+    else if(searchbar.value != '' && this.comics.length > 0){
+      this.reloadComicsList()
+    }
+    if(event){
+      if(searchbar.value == '' && this.comics[0].id != 82967){
+        this.reloadComicsList()
+      }
+    }
+    searchbar.value = '';
   }
 
   ionViewWillEnter(){
     this.hideSearchBar();
+  }
+
+  resetComicsOffset(){
+    this.data.offsetComics = 0;
+  }
+
+  reloadComicsList(){
+    this.comics = []
+    this.resetComicsOffset()
+    this.loadComics()
   }
 
 }

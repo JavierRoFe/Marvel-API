@@ -41,18 +41,26 @@ export class Tab1Page {
     )
   }
 
-  blockScrollSearching(event?){
+  loadCharactersOnSearch(event?){
     console.log('bloqueando el infinite scroll')
     this.data.offsetSearchCharacters += 20
     var searchbar = document.querySelector('ion-searchbar');
     this.data.searchCharacters(searchbar.value).subscribe(
       resp=> {
+        console.log(resp)
+        if ((this.data.offsetSearchCharacters + 20) >= parseInt(resp.data.total)) {
+          this.data.offsetSearchCharacters += (parseInt(resp.data.total) - this.data.offsetSearchCharacters)
+          this.characters.push(...resp.data.results)
+          //event.target.disabled = true;
+          event.target.complete();
+          return;
+        }
         this.characters.push(...resp.data.results)
+        if(event){
+          event.target.complete();
+        }
       }
     )
-    if(event){
-      event.target.complete();
-    }
   }
 
   searchCharacters(searchValue){

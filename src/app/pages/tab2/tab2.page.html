@@ -6,14 +6,14 @@
       </ion-button> 
   </ion-toolbar>
   <ion-toolbar id="toolbar-search-comics" class="toolbar-search-comcis">
-      <ion-searchbar show-cancel-button="focus" animated="true"></ion-searchbar>
+    <ion-searchbar show-cancel-button="focus" animated="true" (search)="searchComics($event)" debounce=300 (ionChange)="searchComics($event)" (ionClear)="reloadComicsList()"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-button slot="fixed" (click)="goToTop()"><ion-icon name="arrow-up"></ion-icon></ion-button> 
   <app-comics [comics]='comics'></app-comics>
-  <ion-infinite-scroll threshold='25%' position="bottom" (ionInfinite)='loadComics($event)'>
+  <ion-infinite-scroll threshold='25%' position="bottom" (ionInfinite)='searchbarVisible == true ? loadComicsOnSearch($event) : loadComics($event)'>
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more comics...">
 
       </ion-infinite-scroll-content>

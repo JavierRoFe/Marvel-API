@@ -13,7 +13,7 @@
 <ion-content [fullscreen]="true">
   <ion-button slot="fixed" (click)="goToTop()"><ion-icon name="arrow-up"></ion-icon></ion-button> 
   <app-characters [characters]='characters'></app-characters>
-  <ion-infinite-scroll threshold='25%' position="bottom" (ionInfinite)='searchbarVisible == true ? blockScrollSearching($event) : loadCharacters($event)'>
+  <ion-infinite-scroll threshold='25%' position="bottom" (ionInfinite)='searchbarVisible == true ? loadCharactersOnSearch($event) : loadCharacters($event)'>
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more characters...">
 
       </ion-infinite-scroll-content>
