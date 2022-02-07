@@ -33,7 +33,6 @@ export class DataService {
   }
 
   searchCharacters(value){
-    console.log(value.target.value)
-    return this.http.get<RespuestaCharacter>(URL + `characters?nameStartsWith=${value.target.value}&` + APIKEY + `&limit=50&offset=${this.offsetSearchCharacters}`);
+    return this.http.get<RespuestaCharacter>(URL + `characters?nameStartsWith=${value}&` + APIKEY + `&limit=50&offset=${this.offsetSearchCharacters}`);
   }
 }

@@ -43,14 +43,22 @@ export class Tab1Page {
 
   blockScrollSearching(event?){
     console.log('bloqueando el infinite scroll')
+    this.data.offsetSearchCharacters += 20
+    var searchbar = document.querySelector('ion-searchbar');
+    this.data.searchCharacters(searchbar.value).subscribe(
+      resp=> {
+        this.characters.push(...resp.data.results)
+      }
+    )
     if(event){
       event.target.complete();
     }
   }
 
   searchCharacters(searchValue){
+    this.data.offsetSearchCharacters = 0;
     if(searchValue.target.value != ''){
-      this.data.searchCharacters(searchValue).subscribe(
+      this.data.searchCharacters(searchValue.target.value).subscribe(
         resp => {
           this.characters = []
           this.characters.push(...resp.data.results)
