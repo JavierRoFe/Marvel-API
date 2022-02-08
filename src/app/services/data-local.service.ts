@@ -6,9 +6,8 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class DataLocalService {
 
-  //private _storage: Storage | null = null;
   favCharactersArray
-  favComicsArray = []
+  favComicsArray
 
   constructor(private storage: Storage) {
     this.init()
@@ -16,7 +15,6 @@ export class DataLocalService {
 
   async init() {
     await this.storage.create();
-    //this._storage = storage;
     //this.clear()
   }
 
@@ -45,8 +43,29 @@ export class DataLocalService {
     await this.storage.set('favcharacters', this.favCharactersArray)
   }
 
-  async setFavComics(comicArray){
-    await this.storage.set('favcomics', comicArray)
+  async setFavComics(comic){
+    this.favComicsArray = await this.storage.get('favcomics')
+    console.log('FAVCHARACTERS: ', this.favComicsArray)
+    if(this.favComicsArray != null){
+      console.log('ARRAY not null', comic)
+      var alreadyExists = false
+      for(let favcomic of this.favComicsArray){
+        if(favcomic.id == comic.id){
+          alreadyExists = true
+          console.log('Existe? ', alreadyExists)
+        } 
+      }
+      if(alreadyExists){
+        console.log('Ya existe: ', comic.title)
+      }else{
+        this.favComicsArray.push(comic)
+      }
+    }else{
+      this.favComicsArray = []
+      this.favComicsArray.push(comic)
+    }
+    console.log('Fav characters antes de subirlo: ', this.favComicsArray)
+    await this.storage.set('favcomics', this.favComicsArray)
   }
 
   async unsetFavCharacters(character){
@@ -57,13 +76,18 @@ export class DataLocalService {
       }
     }
     this.favCharactersArray = tmpArray;
-    /*this.favCharactersArray.forEach((element, index) => {
-      if(element.id == character.id){
-        console.log('Character removed: ', character.name)
-        this.favCharactersArray.splice(index, 1)
-      } 
-    });*/
     await this.storage.set('favcharacters', this.favCharactersArray)
+  }
+
+  async unsetFavComics(comic){
+    var tmpArray = []
+    for(let favcomic of this.favComicsArray){
+      if(favcomic.id != comic.id){
+        tmpArray.push(favcomic)
+      }
+    }
+    this.favComicsArray = tmpArray;
+    await this.storage.set('favcomics', this.favComicsArray)
   }
 
   async getFavCharacters(){
@@ -72,8 +96,8 @@ export class DataLocalService {
   }
 
   async getFavComics(){
-    const comics = await this.storage.get('favcomics')
-    return comics
+    this.favComicsArray = await this.storage.get('favcomics')
+    return this.favComicsArray
   }
 
   async clear(){

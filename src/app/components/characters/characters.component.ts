@@ -33,7 +33,6 @@ export class CharactersComponent implements OnInit {
 
   storeFavCharacter(character){
     console.log('PERSONAJE: ' + character.name)
-    //this.favCharacters.push(character)
     this.dataLocal.setFavCharacter(character)
   }
 }

@@ -9,15 +9,13 @@ import { DataLocalService } from '../../services/data-local.service';
 export class Tab3Page {
 
   characters = [];
+  comics = [];
 
   constructor(private dataLocal: DataLocalService) {}
 
   ngOnInit(){
-    console.log('GUARDADOS: ', this.dataLocal.getFavCharacters())
-    this.dataLocal.getFavCharacters().then(data =>{
-      console.log('DATOS: ', data)
-      this.characters = data
-    })
+    this.getCharactersFromStorage()
+    this.getComicsFromStorage()
   }
 
   getCharacterImage(character){
@@ -25,18 +23,33 @@ export class Tab3Page {
   }
 
   ionViewWillEnter(){
-    this.dataLocal.getFavCharacters().then(data =>{
-      console.log('VIEW WILL ENTER: ', data)
-      this.characters = data
-    })
+    this.getCharactersFromStorage()
+    this.getComicsFromStorage()
   }
 
   async removeCharacterFromList(character){
     console.log('Borrando...')
     await this.dataLocal.unsetFavCharacters(character)
+    this.characters = []
+    this.getCharactersFromStorage()
+  }
+
+  async removeComicFromList(comic){
+    console.log('Borrando...')
+    await this.dataLocal.unsetFavComics(comic)
+    this.comics = []
+    this.getComicsFromStorage()
+  }
+
+  getCharactersFromStorage(){
     this.dataLocal.getFavCharacters().then(data =>{
-      this.characters = []
       this.characters = data
+    })
+  }
+
+  getComicsFromStorage(){
+    this.dataLocal.getFavComics().then(data =>{
+      this.comics = data
     })
   }
 

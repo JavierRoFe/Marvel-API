@@ -7,6 +7,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <h2>Characters</h2>
   <!-- <ion-list *ngFor='let character of characters'>
     <ion-item>
         <img src="{{getCharacterImage(character)}}" alt="">
@@ -19,17 +20,16 @@
         </ion-buttons>
     </ion-item>
   </ion-list> -->
-  <ion-grid fixed style="height: 300px; white-space: nowrap;">
-    <ion-row scrollX=true>
-      <ion-col size="6"  *ngFor="let character of characters; let i = index" class="ion-text-center">
-        <div *ngIf="i%2==0">
+  <div class="character-grid">
+    <div *ngFor='let character of characters'>
+      <div class="item">
+        <ion-card class="ion-text-center">
           <img src="{{getCharacterImage(character)}}" alt="">
-        </div>
-        <div *ngIf="i%2!=0">
-          <img src="{{getCharacterImage(character)}}" alt="">
-        </div>
-      </ion-col>
-      <!-- <ion-col size="6" *ngIf="i%2!=0"><div><img src="{{getCharacterImage(character)}}" alt=""></div></ion-col> -->
-    </ion-row>
-  </ion-grid>
+          <ion-card-header>
+            <ion-card-title>{{character.name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </div>
+  </div>
 </ion-content>

@@ -1,0 +1,27 @@
+h2{
+    margin-left: 20px;
+}
+
+ion-toolbar{
+    --background: var(--ion-color-primary);
+    --color: var(--ion-color-light);
+}
+
+.character-grid{
+    display: flex;
+    overflow-x: auto;
+    max-height: 300px;
+}
+
+.character-col::-webkit-scrollbar{
+    width: 0;
+}
+
+.item{
+    min-width: 200px;
+    height: 95%;
+}
+
+ion-card{
+    height: 90%;
+}

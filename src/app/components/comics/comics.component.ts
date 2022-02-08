@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ResultComic } from 'src/app/interfaces/interfaces';
+import { DataLocalService } from 'src/app/services/data-local.service';
 import { ComicDetailComponent } from '../comic-detail/comic-detail.component';
 
 @Component({
@@ -12,7 +13,7 @@ export class ComicsComponent implements OnInit {
 
   @Input() comics: ResultComic[] = [];
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private dataLocal: DataLocalService) { }
 
   ngOnInit() {}
 
@@ -26,6 +27,11 @@ export class ComicsComponent implements OnInit {
 
   getComicImage(comic){
     return comic.thumbnail.path + '/standard_medium.' + comic.thumbnail.extension;
+  }
+
+  storeFavComic(comic){
+    console.log('COMIC: ' + comic.title)
+    this.dataLocal.setFavComics(comic)
   }
 
 }
