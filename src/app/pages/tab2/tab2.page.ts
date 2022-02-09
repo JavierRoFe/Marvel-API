@@ -112,7 +112,6 @@ export class Tab2Page {
 
   ionViewWillEnter(){
     this.hideSearchBar();
-    this.goToTop()
   }
 
   ionViewWillLeave(){
