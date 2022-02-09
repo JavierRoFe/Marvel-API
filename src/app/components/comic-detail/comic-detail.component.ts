@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { DataService } from 'src/app/services/data.service';
+import { DataLocalService } from '../../services/data-local.service';
 
 @Component({
   selector: 'app-comic-detail',
@@ -13,8 +14,10 @@ export class ComicDetailComponent implements OnInit {
 
   comic;
   creators = []
+  btn_text = ['Añadir a favoritos', 'Eliminar de favoritos']
+  favourite = false;
 
-  constructor(private modalCtrl: ModalController, private data: DataService) { }
+  constructor(private modalCtrl: ModalController, private data: DataService, private dataLocal: DataLocalService) { }
 
   ngOnInit() {
     this.data.getComicDetails(this.id).subscribe(
@@ -23,6 +26,13 @@ export class ComicDetailComponent implements OnInit {
         this.creators = resp.data.results[0].creators.items;
       }
     )
+    this.dataLocal.getFavComics().then(data =>{
+      for(let comic of data){
+        if(this.id == comic.id){
+          this.favourite = true;
+        }
+      }
+    })
   }
 
   goBack(){
@@ -45,6 +55,22 @@ export class ComicDetailComponent implements OnInit {
       index++;
     }
     return creatorsList;
+  }
+
+  storeFavComic(comic){
+    this.favourite = true;
+    this.dataLocal.setFavComics(comic)
+  }
+
+  getFavButtonIcon(){
+    var icon = ''
+    this.favourite ? icon = 'heart-dislike-outline' : icon = 'heart-outline';
+    return icon;
+  }
+
+  unsetFavComic(comic){
+    this.dataLocal.unsetFavComics(comic);
+    this.favourite = false;
   }
 
 }
