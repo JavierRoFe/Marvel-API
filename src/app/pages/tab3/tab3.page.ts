@@ -22,6 +22,10 @@ export class Tab3Page {
     return character.thumbnail.path + '/standard_medium.' + character.thumbnail.extension;
   }
 
+  getComicImage(comic){
+    return comic.thumbnail.path + '/portrait_fantastic.' + comic.thumbnail.extension;
+  }
+
   ionViewWillEnter(){
     this.getCharactersFromStorage()
     this.getComicsFromStorage()

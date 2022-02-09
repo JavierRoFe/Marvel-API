@@ -115,6 +115,10 @@ export class Tab1Page {
     this.hideSearchBar();
   }
 
+  ionViewWillLeave(){
+    this.reloadCharactersList()
+  }
+
   resetCharactersOffset(){
     this.data.offsetCharacters = 0;
   }

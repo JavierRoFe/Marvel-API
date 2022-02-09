@@ -114,6 +114,10 @@ export class Tab2Page {
     this.hideSearchBar();
   }
 
+  ionViewWillLeave(){
+    this.reloadComicsList();
+  }
+
   resetComicsOffset(){
     this.data.offsetComics = 0;
   }

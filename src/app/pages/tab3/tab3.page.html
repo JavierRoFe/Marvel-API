@@ -32,4 +32,17 @@
       </div>
     </div>
   </div>
+  <h2>Comics</h2>
+  <div class="comic-grid">
+    <div *ngFor='let comic of comics'>
+      <div class="item">
+        <ion-card class="ion-text-center">
+          <img src="{{getComicImage(comic)}}" alt="">
+          <ion-card-header>
+            <ion-card-title>{{comic.title}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </div>
+  </div>
 </ion-content>
