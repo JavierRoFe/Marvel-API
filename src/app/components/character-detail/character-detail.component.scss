@@ -3,12 +3,13 @@
 }
 
 .btn-container{
-    bottom: 15px;
+    bottom: 0px;
     width: 100%;
+    background-color: white;
 }
 
 .fav-btn{
-    margin: 0px 15px;
+    margin:15px;
 }
 
 .description{
@@ -22,4 +23,8 @@
 ion-toolbar{
     --background: var(--ion-color-primary);
     --color: var(--ion-color-light);
+}
+
+.list-item{
+    margin: 5px 0px;
 }

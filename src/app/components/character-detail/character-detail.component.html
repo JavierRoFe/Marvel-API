@@ -15,10 +15,15 @@
     <p>{{character.description}}</p>
   </div>
 
+  <div class="description">
+    <p class="list-item">Comics:</p>
+    <p *ngFor="let comic of comics" class="list-item">{{comic.name}}</p><br>
+  </div>
+
   <div class="btn-container" slot="fixed">
-    <ion-button slot="fixed" (click)="onClick()" expand="block" class="fav-btn">
-      Añadir a favoritos
-      <ion-icon slot="end" name="heart-outline"></ion-icon>
+    <ion-button slot="fixed" (click)="favourite ? unsetFavCharacter(character) : storeFavCharacter(character)" expand="block" class="fav-btn">
+      {{favourite ? btn_text[1] : btn_text[0]}}
+      <ion-icon slot="end" name="{{getFavButtonIcon()}}" id="fav-icon"></ion-icon>
     </ion-button>
   </div>
 </ion-content>
