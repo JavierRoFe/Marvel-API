@@ -112,10 +112,13 @@ export class Tab2Page {
 
   ionViewWillEnter(){
     this.hideSearchBar();
+    this.goToTop()
   }
 
   ionViewWillLeave(){
-    this.reloadComicsList();
+    if(this.comics[0].id != 82967){
+      this.reloadComicsList()
+    }
   }
 
   resetComicsOffset(){

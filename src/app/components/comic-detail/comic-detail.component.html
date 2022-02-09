@@ -19,8 +19,14 @@
     <p>Número de páginas: {{comic.pageCount}}</p>
   </div>
 
-  <ion-button (click)="onClick()" expand="block" class="fav-btn">
-    Añadir a favoritos
-    <ion-icon slot="end" name="heart-outline"></ion-icon>
-  </ion-button>
+  <div class="description">
+    <p>Autores: {{getCreators()}}</p>
+  </div>
+
+  <div class="btn-container" slot="fixed">
+    <ion-button slot="fixed" (click)="onClick()" expand="block" class="fav-btn">
+      Añadir a favoritos
+      <ion-icon slot="end" name="heart-outline"></ion-icon>
+    </ion-button>
+  </div>
 </ion-content>

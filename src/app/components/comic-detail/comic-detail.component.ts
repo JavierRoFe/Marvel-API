@@ -12,6 +12,7 @@ export class ComicDetailComponent implements OnInit {
   @Input() id
 
   comic;
+  creators = []
 
   constructor(private modalCtrl: ModalController, private data: DataService) { }
 
@@ -19,6 +20,7 @@ export class ComicDetailComponent implements OnInit {
     this.data.getComicDetails(this.id).subscribe(
       resp =>{
         this.comic = resp.data.results[0];
+        this.creators = resp.data.results[0].creators.items;
       }
     )
   }
@@ -29,6 +31,20 @@ export class ComicDetailComponent implements OnInit {
 
   getComicImage(comic){
     return comic.thumbnail.path + '/portrait_fantastic.' + comic.thumbnail.extension;
+  }
+
+  getCreators(){
+    var creatorsList = ''
+    var index = 0;
+    for(let creator of this.creators){
+      if(index != this.creators.length - 1){
+        creatorsList += creator.name + ', ';
+      }else{
+        creatorsList += creator.name;
+      }
+      index++;
+    }
+    return creatorsList;
   }
 
 }

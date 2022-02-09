@@ -113,10 +113,13 @@ export class Tab1Page {
 
   ionViewWillEnter(){
     this.hideSearchBar();
+    this.goToTop();
   }
 
   ionViewWillLeave(){
-    this.reloadCharactersList()
+    if(this.characters[0].id != 1011334){
+      this.reloadCharactersList()
+    }
   }
 
   resetCharactersOffset(){
