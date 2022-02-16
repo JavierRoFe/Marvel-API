@@ -25,7 +25,6 @@ export class Tab2Page {
     this.data.getComics().subscribe(
       resp => {
         this.data.offsetComics += 20;
-        console.log(resp)
         if ((this.data.offsetComics + 20) >= parseInt(resp.data.total)) {
           this.data.offsetComics += (parseInt(resp.data.total) - this.data.offsetComics)
           this.comics.push(...resp.data.results)
@@ -41,12 +40,10 @@ export class Tab2Page {
   }
 
   loadComicsOnSearch(event?){
-    console.log('bloqueando el infinite scroll')
     this.data.offsetSearchComics += 20
     var searchbar = document.querySelector('ion-searchbar');
     this.data.searchComics(searchbar.value).subscribe(
       resp=> {
-        console.log(resp)
         if ((this.data.offsetSearchComics + 20) >= parseInt(resp.data.total)) {
           this.data.offsetSearchComics += (parseInt(resp.data.total) - this.data.offsetSearchComics)
           this.comics.push(...resp.data.results)

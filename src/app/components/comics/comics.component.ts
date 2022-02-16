@@ -30,7 +30,6 @@ export class ComicsComponent implements OnInit {
   }
 
   storeFavComic(comic){
-    console.log('COMIC: ' + comic.title)
     this.dataLocal.setFavComics(comic)
   }
 

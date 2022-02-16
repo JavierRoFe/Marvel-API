@@ -15,23 +15,21 @@ export class DataLocalService {
 
   async init() {
     await this.storage.create();
-    //this.clear()
   }
 
+  /*
+  Recoge el array del storage, comprueba si el personaje está ya en favoritos, si no está lo añade y sube el array al storage
+  */
   async setFavCharacter(character){
     this.favCharactersArray = await this.storage.get('favcharacters')
-    console.log('FAVCHARACTERS: ', this.favCharactersArray)
     if(this.favCharactersArray != null){
-      console.log('ARRAY not null', character)
       var alreadyExists = false
       for(let favcharacter of this.favCharactersArray){
         if(favcharacter.id == character.id){
           alreadyExists = true
-          console.log('Existe? ', alreadyExists)
         } 
       }
       if(alreadyExists){
-        console.log('Ya existe: ', character.name)
       }else{
         this.favCharactersArray.push(character)
       }
@@ -39,35 +37,32 @@ export class DataLocalService {
       this.favCharactersArray = []
       this.favCharactersArray.push(character)
     }
-    console.log('Fav characters antes de subirlo: ', this.favCharactersArray)
     await this.storage.set('favcharacters', this.favCharactersArray)
   }
 
+  /*
+  Recoge los comics del storage, comprueba si el comic de parámetro ya es favorito, si no lo es lo añade al array y lo sube al storage
+  */
   async setFavComics(comic){
     this.favComicsArray = await this.storage.get('favcomics')
-    console.log('FAVCHARACTERS: ', this.favComicsArray)
     if(this.favComicsArray != null){
-      console.log('ARRAY not null', comic)
       var alreadyExists = false
       for(let favcomic of this.favComicsArray){
         if(favcomic.id == comic.id){
           alreadyExists = true
-          console.log('Existe? ', alreadyExists)
         } 
       }
-      if(alreadyExists){
-        console.log('Ya existe: ', comic.title)
-      }else{
-        this.favComicsArray.push(comic)
-      }
+      if(!alreadyExists) this.favComicsArray.push(comic)
     }else{
       this.favComicsArray = []
       this.favComicsArray.push(comic)
     }
-    console.log('Fav characters antes de subirlo: ', this.favComicsArray)
     await this.storage.set('favcomics', this.favComicsArray)
   }
 
+  /*
+  Pasa los personajes diferentes a un array temporal y lo sube al storage
+  */
   async unsetFavCharacters(character){
     var tmpArray = []
     for(let favcharacter of this.favCharactersArray){
@@ -79,6 +74,9 @@ export class DataLocalService {
     await this.storage.set('favcharacters', this.favCharactersArray)
   }
 
+  /*
+  Pasa los comics diferentes a un array temporal y lo sube al storage
+  */
   async unsetFavComics(comic){
     var tmpArray = []
     for(let favcomic of this.favComicsArray){
@@ -90,16 +88,25 @@ export class DataLocalService {
     await this.storage.set('favcomics', this.favComicsArray)
   }
 
+  /*
+  Recoge los personajes favoritos del storage en un array
+  */
   async getFavCharacters(){
     this.favCharactersArray = await this.storage.get('favcharacters')
     return this.favCharactersArray
   }
 
+  /*
+  Recoge los comics favoritos del storage en un array
+  */
   async getFavComics(){
     this.favComicsArray = await this.storage.get('favcomics')
     return this.favComicsArray
   }
 
+  /*
+  Vacía el storage, usado durante el testing
+  */
   async clear(){
     await this.storage.clear();
   }

@@ -25,7 +25,6 @@ export class Tab1Page {
     this.data.getCharacters().subscribe(
       resp => {
         this.data.offsetCharacters += 20;
-        console.log(resp)
         if ((this.data.offsetCharacters + 20) >= parseInt(resp.data.total)) {
           this.data.offsetCharacters += (parseInt(resp.data.total) - this.data.offsetCharacters)
           this.characters.push(...resp.data.results)
@@ -42,12 +41,10 @@ export class Tab1Page {
   }
 
   loadCharactersOnSearch(event?){
-    console.log('bloqueando el infinite scroll')
     this.data.offsetSearchCharacters += 20
     var searchbar = document.querySelector('ion-searchbar');
     this.data.searchCharacters(searchbar.value).subscribe(
       resp=> {
-        console.log(resp)
         if ((this.data.offsetSearchCharacters + 20) >= parseInt(resp.data.total)) {
           this.data.offsetSearchCharacters += (parseInt(resp.data.total) - this.data.offsetSearchCharacters)
           this.characters.push(...resp.data.results)
