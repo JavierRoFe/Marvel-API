@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { CharacterDetailComponent } from 'src/app/components/character-detail/character-detail.component';
+import { ComicDetailComponent } from 'src/app/components/comic-detail/comic-detail.component';
 import { DataLocalService } from '../../services/data-local.service';
 
 @Component({
@@ -11,7 +14,7 @@ export class Tab3Page {
   characters = [];
   comics = [];
 
-  constructor(private dataLocal: DataLocalService) {}
+  constructor(private dataLocal: DataLocalService, private modalCtrl: ModalController) {}
 
   ngOnInit(){
     this.getCharactersFromStorage()
@@ -31,20 +34,6 @@ export class Tab3Page {
     this.getComicsFromStorage()
   }
 
-  async removeCharacterFromList(character){
-    console.log('Borrando...')
-    await this.dataLocal.unsetFavCharacters(character)
-    this.characters = []
-    this.getCharactersFromStorage()
-  }
-
-  async removeComicFromList(comic){
-    console.log('Borrando...')
-    await this.dataLocal.unsetFavComics(comic)
-    this.comics = []
-    this.getComicsFromStorage()
-  }
-
   getCharactersFromStorage(){
     this.dataLocal.getFavCharacters().then(data =>{
       this.characters = data
@@ -57,4 +46,32 @@ export class Tab3Page {
     })
   }
 
+  async openCharacterDetails(id){
+    const modal = await this.modalCtrl.create({
+      component: CharacterDetailComponent,
+      componentProps: {id}
+    })
+    modal.onDidDismiss().then(data =>{
+      this.reloadArrays()
+    })
+    modal.present()
+  }
+
+  async openComicDetails(id){
+    const modal = await this.modalCtrl.create({
+      component: ComicDetailComponent,
+      componentProps: {id}
+    })
+    modal.onDidDismiss().then(data =>{
+      this.reloadArrays()
+    })
+    modal.present()
+  }
+
+  reloadArrays(){
+    this.characters = [];
+    this.comics = [];
+    this.getCharactersFromStorage()
+    this.getComicsFromStorage()
+  }
 }

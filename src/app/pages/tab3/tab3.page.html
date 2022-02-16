@@ -23,7 +23,7 @@
   <div class="character-grid">
     <div *ngFor='let character of characters'>
       <div class="item-character">
-        <ion-card class="ion-text-center character-card">
+        <ion-card class="ion-text-center character-card" (click)="openCharacterDetails(character.id)">
           <img src="{{getCharacterImage(character)}}" alt="">
           <ion-card-header>
             <ion-card-title>{{character.name}}</ion-card-title>
