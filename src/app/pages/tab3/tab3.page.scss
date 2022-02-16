@@ -13,16 +13,50 @@ ion-toolbar{
     max-height: 300px;
 }
 
+.character-card{
+    height: 210px;
+    width: 160px;
+
+    img{
+        margin-top: 10px;
+        border-radius: 4px;
+    }
+
+    ion-card-title{
+        line-height: 1.2em;
+        height: 2.4em;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+}
+
+.comic-card{
+    height: 260px;
+    width: 150px;
+}
+
 .character-grid::-webkit-scrollbar, .comic-grid::-webkit-scrollbar{
     width: 0;
     display: none;
 }
 
-.item{
-    min-width: 205px;
-    height: 95%;
+.item-comic{
+    min-width: 168px;
+    height: 280px;
 }
 
-ion-card{
-    height: 90%;
+ion-card-header{
+    padding: 0px 10px;
+}
+
+h4{
+    margin: 0;
+    color: var(--ion-color-dark);
+    font-size: 18px;
+    font-weight: 400;
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap;
 }

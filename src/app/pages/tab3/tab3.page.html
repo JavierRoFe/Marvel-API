@@ -22,8 +22,8 @@
   </ion-list> -->
   <div class="character-grid">
     <div *ngFor='let character of characters'>
-      <div class="item">
-        <ion-card class="ion-text-center">
+      <div class="item-character">
+        <ion-card class="ion-text-center character-card">
           <img src="{{getCharacterImage(character)}}" alt="">
           <ion-card-header>
             <ion-card-title>{{character.name}}</ion-card-title>
@@ -35,11 +35,11 @@
   <h2>Comics</h2>
   <div class="comic-grid">
     <div *ngFor='let comic of comics'>
-      <div class="item">
-        <ion-card class="ion-text-center">
+      <div class="item-comic">
+        <ion-card class="ion-text-center comic-card">
           <img src="{{getComicImage(comic)}}" alt="">
           <ion-card-header>
-            <ion-card-title>{{comic.title}}</ion-card-title>
+            <h4>{{comic.title}}</h4>
           </ion-card-header>
         </ion-card>
       </div>

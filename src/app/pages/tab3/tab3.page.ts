@@ -19,11 +19,11 @@ export class Tab3Page {
   }
 
   getCharacterImage(character){
-    return character.thumbnail.path + '/standard_medium.' + character.thumbnail.extension;
+    return character.thumbnail.path + '/standard_large.' + character.thumbnail.extension;
   }
 
   getComicImage(comic){
-    return comic.thumbnail.path + '/portrait_fantastic.' + comic.thumbnail.extension;
+    return comic.thumbnail.path + '/portrait_xlarge.' + comic.thumbnail.extension;
   }
 
   ionViewWillEnter(){
