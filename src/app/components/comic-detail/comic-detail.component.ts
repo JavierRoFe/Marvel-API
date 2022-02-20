@@ -35,14 +35,23 @@ export class ComicDetailComponent implements OnInit {
     })
   }
 
+  /*
+  Cierra el modal
+  */
   goBack(){
     this.modalCtrl.dismiss()
   }
 
+  /*
+  Devuelve la ruta de la imagen del comic
+  */
   getComicImage(comic){
     return comic.thumbnail.path + '/portrait_fantastic.' + comic.thumbnail.extension;
   }
 
+  /*
+  Devuelve un string con la lista de autores del comic
+  */
   getCreators(){
     var creatorsList = ''
     var index = 0;
@@ -57,17 +66,26 @@ export class ComicDetailComponent implements OnInit {
     return creatorsList;
   }
 
+  /*
+  Llama a la función que guarda el comic en el local storage
+  */
   storeFavComic(comic){
     this.favourite = true;
     this.dataLocal.setFavComics(comic)
   }
 
+  /*
+  Cambia el icono del botón dependiendo de si el comic está en favoritos o no
+  */
   getFavButtonIcon(){
     var icon = ''
     this.favourite ? icon = 'heart-dislike-outline' : icon = 'heart-outline';
     return icon;
   }
 
+  /*
+  Llama a la función que elimina a un comic de favoritos en el local storage
+  */
   unsetFavComic(comic){
     this.dataLocal.unsetFavComics(comic);
     this.favourite = false;

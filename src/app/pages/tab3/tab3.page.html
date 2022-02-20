@@ -36,7 +36,7 @@
   <div class="comic-grid">
     <div *ngFor='let comic of comics'>
       <div class="item-comic">
-        <ion-card class="ion-text-center comic-card">
+        <ion-card class="ion-text-center comic-card" (click)="openComicDetails(comic.id)">
           <img src="{{getComicImage(comic)}}" alt="">
           <ion-card-header>
             <h4>{{comic.title}}</h4>
