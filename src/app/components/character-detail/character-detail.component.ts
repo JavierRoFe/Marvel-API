@@ -35,25 +35,40 @@ export class CharacterDetailComponent implements OnInit {
     })
   }
 
+  /*
+  Cierra el modal
+  */
   goBack(){
     this.modalCtrl.dismiss()
   }
 
+  /*
+  Devuelve la ruta de la imagen del personaje
+  */
   getCharacterImage(character){
     return character.thumbnail.path + '/landscape_xlarge.' + character.thumbnail.extension;
   }
 
+  /*
+  Llama a la función que guarda el personaje en el local storage
+  */
   storeFavCharacter(character){
     this.favourite = true;
     this.dataLocal.setFavCharacter(character)
   }
 
+  /*
+  Cambia el icono del botón dependiendo de si el personaje está en favoritos o no
+  */
   getFavButtonIcon(){
     var icon = ''
     this.favourite ? icon = 'heart-dislike-outline' : icon = 'heart-outline';
     return icon;
   }
 
+  /*
+  Llama a la función que elimina a un personaje de favoritos en el local storage
+  */
   unsetFavCharacter(character){
     this.dataLocal.unsetFavCharacters(character);
     this.favourite = false;

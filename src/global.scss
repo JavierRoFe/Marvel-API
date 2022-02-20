@@ -30,3 +30,9 @@
     src: url('assets/Titillium_Web/TitilliumWeb-Regular.ttf');
     src: url('assets/Titillium_Web/TitilliumWeb-Bold.ttf');
 }
+
+.toast{
+    --border-radius: 8px;
+    --start: 50px;
+    --end: 50px;
+}

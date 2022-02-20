@@ -41,10 +41,14 @@ export class Tab1Page {
   }
 
   loadCharactersOnSearch(event?){
-    this.data.offsetSearchCharacters += 20
     var searchbar = document.querySelector('ion-searchbar');
     this.data.searchCharacters(searchbar.value).subscribe(
       resp=> {
+        if(parseInt(resp.data.total) < 20){
+          event.target.complete();
+          return;
+        } 
+
         if ((this.data.offsetSearchCharacters + 20) >= parseInt(resp.data.total)) {
           this.data.offsetSearchCharacters += (parseInt(resp.data.total) - this.data.offsetSearchCharacters)
           this.characters.push(...resp.data.results)
@@ -52,7 +56,10 @@ export class Tab1Page {
           event.target.complete();
           return;
         }
+
         this.characters.push(...resp.data.results)
+        this.data.offsetSearchCharacters += 20;
+        
         if(event){
           event.target.complete();
         }
@@ -67,6 +74,8 @@ export class Tab1Page {
         resp => {
           this.characters = []
           this.characters.push(...resp.data.results)
+
+          if(parseInt(resp.data.total) > 20) this.data.offsetSearchCharacters += 20;
         }
       )
     }
