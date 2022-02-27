@@ -21,6 +21,9 @@ export class Tab1Page {
     this.loadCharacters();
   }
 
+  /*
+  Recoge 20 personajes de la API
+  */
   loadCharacters(event?) {
     this.data.getCharacters().subscribe(
       resp => {
@@ -40,6 +43,9 @@ export class Tab1Page {
     )
   }
 
+  /*
+  Recoge los 20 personajes siguientes de una búsqueda
+  */
   loadCharactersOnSearch(event?){
     var searchbar = document.querySelector('ion-searchbar');
     this.data.searchCharacters(searchbar.value).subscribe(
@@ -67,6 +73,9 @@ export class Tab1Page {
     )
   }
 
+  /*
+  Consulta una lista de personajes en la API según el texto escrito en el searchbar
+  */
   searchCharacters(searchValue){
     this.data.offsetSearchCharacters = 0;
     if(searchValue.target.value != ''){
@@ -81,10 +90,16 @@ export class Tab1Page {
     }
   }
 
+  /*
+  Scrollea al inicio de la página
+  */
   goToTop(){
     this.content.scrollToTop(500);
   }
 
+  /*
+  Muestra la searchbar oculta al apretar el botón
+  */
   showSearchBar(){
     var btnsearch = document.getElementById('search-icon')
     btnsearch.setAttribute('name', 'close')
@@ -93,6 +108,9 @@ export class Tab1Page {
     this.searchbarVisible = true
   }
 
+  /*
+  Esconde la searchbar y refresca la lista de personajes
+  */
   hideSearchBar(event?){
     var btnsearch = document.getElementById('search-icon')
     btnsearch.setAttribute('name', 'search')
@@ -117,24 +135,35 @@ export class Tab1Page {
     searchbar.value = '';
   }
 
+  /*
+  Esconde la searchbar al entrar a la página
+  */
   ionViewWillEnter(){
     this.hideSearchBar();
   }
 
+  /*
+  Refresca la lista de personajes al abandonar la página
+  */
   ionViewWillLeave(){
     if(this.characters[0].id != 1011334){
       this.reloadCharactersList()
     }
   }
 
+  /*
+  Reestablece el offset de los personajes a 0
+  */
   resetCharactersOffset(){
     this.data.offsetCharacters = 0;
   }
 
+  /*
+  Refresca la lista de personajes
+  */
   reloadCharactersList(){
     this.characters = []
     this.resetCharactersOffset()
     this.loadCharacters()
   }
-
 }

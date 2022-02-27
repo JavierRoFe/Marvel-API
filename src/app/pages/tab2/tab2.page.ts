@@ -21,6 +21,9 @@ export class Tab2Page {
     this.loadComics();
   }
 
+  /*
+  Recoge 20 comics de la API
+  */
   loadComics(event?) {
     this.data.getComics().subscribe(
       resp => {
@@ -39,6 +42,9 @@ export class Tab2Page {
       })
   }
 
+  /*
+  Recoge los 20 comics siguientes de una búsqueda
+  */
   loadComicsOnSearch(event?){
     this.data.offsetSearchComics += 20
     var searchbar = document.querySelector('ion-searchbar');
@@ -59,6 +65,9 @@ export class Tab2Page {
     )
   }
 
+  /*
+  Consulta una lista de comics en la API según el texto escrito en el searchbar
+  */
   searchComics(searchValue){
     this.data.offsetSearchComics = 0;
     if(searchValue.target.value != ''){
@@ -71,10 +80,16 @@ export class Tab2Page {
     }
   }
 
+  /*
+  Scrollea al inicio de la página
+  */
   goToTop(){
     this.content.scrollToTop(500);
   }
 
+  /*
+  Muestra la searchbar oculta al apretar el botón
+  */
   showSearchBar(){
     var btnsearch = document.getElementById('search-icon-comics')
     btnsearch.setAttribute('name', 'close')
@@ -83,6 +98,9 @@ export class Tab2Page {
     this.searchbarVisible = true
   }
 
+  /*
+  Esconde la searchbar y refresca la lista de comics
+  */
   hideSearchBar(event?){
     var btnsearch = document.getElementById('search-icon-comics')
     btnsearch.setAttribute('name', 'search')
@@ -107,20 +125,32 @@ export class Tab2Page {
     searchbar.value = '';
   }
 
+  /*
+  Esconde la searchbar al entrar a la página
+  */
   ionViewWillEnter(){
     this.hideSearchBar();
   }
 
+  /*
+  Refresca la lista de comics al abandonar la página
+  */
   ionViewWillLeave(){
     if(this.comics[0].id != 82967){
       this.reloadComicsList()
     }
   }
 
+  /*
+  Reestablece el offset de los comics a 0
+  */
   resetComicsOffset(){
     this.data.offsetComics = 0;
   }
 
+  /*
+  Refresca la lista de comics
+  */
   reloadComicsList(){
     this.comics = []
     this.resetComicsOffset()

@@ -21,31 +21,49 @@ export class Tab3Page {
     this.getComicsFromStorage()
   }
 
+  /*
+  Devuelve una url con la imagen del personaje
+  */
   getCharacterImage(character){
     return character.thumbnail.path + '/standard_large.' + character.thumbnail.extension;
   }
 
+  /*
+  Devuelve una url con la carátula del comic
+  */
   getComicImage(comic){
     return comic.thumbnail.path + '/portrait_xlarge.' + comic.thumbnail.extension;
   }
 
+  /*
+  Carga los personajes y comics al entrar a la página
+  */
   ionViewWillEnter(){
     this.getCharactersFromStorage()
     this.getComicsFromStorage()
   }
 
+  /*
+  Recoge la lista de personajes del storage
+  */
   getCharactersFromStorage(){
     this.dataLocal.getFavCharacters().then(data =>{
       this.characters = data
     })
   }
 
+  /*
+  Recoge la lista de comics del storage
+  */
   getComicsFromStorage(){
     this.dataLocal.getFavComics().then(data =>{
       this.comics = data
     })
   }
 
+  /*
+  Crea un model para mostrar los detalles de un personaje
+  */
   async openCharacterDetails(id){
     const modal = await this.modalCtrl.create({
       component: CharacterDetailComponent,
@@ -57,6 +75,9 @@ export class Tab3Page {
     modal.present()
   }
 
+  /*
+  Crea un model para mostrar los detalles de un comic
+  */
   async openComicDetails(id){
     const modal = await this.modalCtrl.create({
       component: ComicDetailComponent,
@@ -68,6 +89,9 @@ export class Tab3Page {
     modal.present()
   }
 
+  /*
+  Crea un model para mostrar los detalles de un personaje
+  */
   reloadArrays(){
     this.characters = [];
     this.comics = [];
